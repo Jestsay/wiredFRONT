@@ -1,0 +1,721 @@
+/* WIRED|FRONT Monitor/RightSidebar Component - Enterprise CSS Module */
+
+@layer monitor {
+  /* =====================================================
+     MONITOR LAYOUT SYSTEM - ENTERPRISE GRADE
+     ===================================================== */
+
+  .wf-monitor {
+    grid-area: monitor;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(1.5rem);
+    background: linear-gradient(180deg,
+      rgba(92, 43, 112, 0.12) 0%,
+      var(--glass-bg) 50%,
+      rgba(191, 74, 6, 0.12) 100%
+    );
+    border-left: 0.0625rem solid var(--glass-border);
+    animation: wf-slide-in-right 0.6s var(--ease-in-out);
+    z-index: var(--z-overlay);
+    width: var(--monitor-width);
+    min-width: var(--monitor-width);
+    height: 100%;
+    min-height: 0;
+    box-shadow: -0.125rem 0 0.5rem rgba(0, 0, 0, 0.15);
+  }
+
+  /* Monitor Content */
+  .wf-monitor-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* Monitor Header */
+  .wf-monitor-header {
+    padding: var(--space-lg);
+    border-bottom: 0.0625rem solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .wf-monitor-header-content {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .wf-monitor-header svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--color-primary);
+    animation: wf-pulse 2s ease-in-out infinite;
+  }
+
+  .wf-monitor-header h3 {
+    font-weight: var(--font-semibold);
+    color: var(--color-text);
+    font-size: var(--text-base);
+    margin: 0;
+    flex: 1;
+  }
+
+  .wf-monitor-header-status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  /* Tab Navigation */
+  .wf-monitor-tabs {
+    display: flex;
+    border-bottom: 0.0625rem solid var(--glass-border);
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .wf-monitor-tab {
+    flex: 1;
+    padding: var(--space-md) var(--space-sm);
+    text-align: center;
+    transition: all var(--transition-base) ease-out;
+    border-bottom: 0.125rem solid transparent;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--color-muted);
+    font-size: var(--text-xs);
+    font-weight: var(--font-medium);
+  }
+
+  .wf-monitor-tab:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-text);
+  }
+
+  .wf-monitor-tab.active {
+    background: rgba(94, 234, 212, 0.1);
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+    box-shadow: inset 0 0 0.5rem rgba(94, 234, 212, 0.1);
+  }
+
+  .wf-monitor-tab svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  /* Content Area */
+  .wf-monitor-content-area {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+  }
+
+  .wf-monitor-tab-content {
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  /* Section Titles */
+  .wf-monitor-section-title {
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: var(--color-text);
+    margin: 0 0 var(--space-md) 0;
+    padding-bottom: var(--space-sm);
+    border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.1);
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+  }
+
+  /* System Overview */
+  .wf-monitor-overview {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 0.0625rem solid var(--glass-border);
+    border-radius: 0.75rem;
+    padding: var(--space-lg);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .wf-monitor-overview-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .wf-monitor-overview-header svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--color-primary);
+    animation: wf-pulse 2s ease-in-out infinite;
+  }
+
+  .wf-monitor-overview-header h4 {
+    font-weight: var(--font-semibold);
+    color: var(--color-text);
+    font-size: var(--text-base);
+    margin: 0;
+    flex: 1;
+  }
+
+  .wf-monitor-time {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-xs);
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+  }
+
+  .wf-monitor-time svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    animation: none;
+  }
+
+  .wf-monitor-overview-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .wf-monitor-stat-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 0.5rem;
+    font-size: var(--text-xs);
+  }
+
+  .wf-monitor-stat-item svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    color: var(--color-primary);
+    animation: none;
+  }
+
+  .wf-monitor-stat-item span:first-of-type {
+    color: var(--color-muted);
+    flex: 1;
+  }
+
+  .wf-monitor-stat-value {
+    font-weight: var(--font-semibold);
+    color: var(--color-text);
+    font-family: var(--font-mono);
+  }
+
+  /* Performance Metrics */
+  .wf-monitor-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .wf-monitor-metric {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 0.0625rem solid var(--glass-border);
+    border-radius: 0.75rem;
+    padding: var(--space-md);
+    transition: all var(--transition-base) ease;
+    box-shadow: var(--glass-shadow);
+  }
+
+  .wf-monitor-metric:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-0.0625rem);
+  }
+
+  .wf-monitor-metric-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-sm);
+  }
+
+  .wf-monitor-metric-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .wf-monitor-metric-label span {
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    font-weight: var(--font-medium);
+  }
+
+  .wf-monitor-metric-values {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .wf-monitor-metric-value {
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    color: var(--color-text);
+    font-family: var(--font-mono);
+  }
+
+  .wf-monitor-metric-trend {
+    font-size: var(--text-xs);
+    font-weight: var(--font-medium);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-family: var(--font-mono);
+  }
+
+  .wf-monitor-metric-trend.up {
+    background: rgba(34, 197, 94, 0.2);
+    color: var(--color-success);
+  }
+
+  .wf-monitor-metric-trend.down {
+    background: rgba(244, 63, 94, 0.2);
+    color: var(--color-error);
+  }
+
+  /* Progress Bar */
+  .wf-monitor-progress {
+    width: 100%;
+    height: 0.375rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 0.25rem;
+    overflow: hidden;
+    margin-bottom: var(--space-sm);
+  }
+
+  .wf-monitor-progress-bar {
+    height: 0.375rem;
+    border-radius: 0.25rem;
+    transition: all var(--transition-slow) ease-out;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .wf-monitor-progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: wf-progress-shimmer 2s infinite;
+  }
+
+  .wf-monitor-progress-bar.success {
+    background: linear-gradient(90deg, var(--color-success), var(--color-primary));
+  }
+
+  .wf-monitor-progress-bar.info {
+    background: linear-gradient(90deg, var(--color-info), var(--color-secondary));
+  }
+
+  .wf-monitor-progress-bar.warning {
+    background: linear-gradient(90deg, var(--color-warning), var(--color-accent));
+  }
+
+  .wf-monitor-progress-bar.primary {
+    background: linear-gradient(90deg, var(--color-primary), var(--wf-violet));
+  }
+
+  /* Metric Status */
+  .wf-monitor-metric-status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .wf-monitor-status-text {
+    font-size: var(--text-xs);
+    color: var(--color-muted);
+    text-transform: capitalize;
+  }
+
+  /* Status Dots */
+  .wf-monitor-status-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    animation: wf-pulse 2s ease-in-out infinite;
+  }
+
+  .wf-monitor-status-dot.online,
+  .wf-monitor-status-dot.healthy {
+    background: var(--color-success);
+    box-shadow: 0 0 0.5rem rgba(34, 197, 94, 0.5);
+  }
+
+  .wf-monitor-status-dot.warning,
+  .wf-monitor-status-dot.moderate {
+    background: var(--color-warning);
+    box-shadow: 0 0 0.5rem rgba(250, 204, 21, 0.5);
+  }
+
+  .wf-monitor-status-dot.error,
+  .wf-monitor-status-dot.critical {
+    background: var(--color-error);
+    box-shadow: 0 0 0.5rem rgba(244, 63, 94, 0.5);
+  }
+
+  /* System Services */
+  .wf-monitor-services {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .wf-monitor-services-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .wf-monitor-service-item {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 0.0625rem solid var(--glass-border);
+    border-radius: 0.5rem;
+    padding: var(--space-md);
+    transition: all var(--transition-base) ease;
+  }
+
+  .wf-monitor-service-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .wf-monitor-service-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xs);
+  }
+
+  .wf-monitor-service-header svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    color: var(--color-primary);
+  }
+
+  .wf-monitor-service-name {
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-text);
+    flex: 1;
+  }
+
+  .wf-monitor-service-uptime {
+    font-size: var(--text-xs);
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+  }
+
+  /* Analytics */
+  .wf-monitor-analytics-cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .wf-monitor-analytics-card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 0.0625rem solid var(--glass-border);
+    border-radius: 0.75rem;
+    padding: var(--space-lg);
+    transition: all var(--transition-base) ease;
+  }
+
+  .wf-monitor-analytics-card:hover {
+    transform: translateY(-0.0625rem);
+    box-shadow: var(--shadow-raised);
+  }
+
+  .wf-monitor-analytics-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .wf-monitor-analytics-card-header span {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+
+  .wf-monitor-analytics-card-value {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+    font-family: var(--font-mono);
+  }
+
+  .wf-monitor-analytics-card-change {
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-family: var(--font-mono);
+  }
+
+  .wf-monitor-analytics-card-change.positive {
+    background: rgba(34, 197, 94, 0.2);
+    color: var(--color-success);
+  }
+
+  .wf-monitor-analytics-card-change.negative {
+    background: rgba(244, 63, 94, 0.2);
+    color: var(--color-error);
+  }
+
+  /* Activity Logs */
+  .wf-monitor-activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .wf-monitor-activity-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 0.0625rem solid var(--glass-border);
+    border-radius: 0.5rem;
+    transition: all var(--transition-base) ease;
+    position: relative;
+  }
+
+  .wf-monitor-activity-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .wf-monitor-activity-icon {
+    flex-shrink: 0;
+    padding: var(--space-xs);
+    border-radius: 0.375rem;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .wf-monitor-activity-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .wf-monitor-activity-message {
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+    line-height: 1.4;
+  }
+
+  .wf-monitor-activity-time {
+    font-size: var(--text-xs);
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+  }
+
+  .wf-monitor-activity-severity {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0.25rem;
+    height: 100%;
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+
+  .wf-monitor-activity-severity.success {
+    background: var(--color-success);
+  }
+
+  .wf-monitor-activity-severity.warning {
+    background: var(--color-warning);
+  }
+
+  .wf-monitor-activity-severity.error {
+    background: var(--color-error);
+  }
+
+  .wf-monitor-activity-severity.info {
+    background: var(--color-info);
+  }
+
+  /* Alerts */
+  .wf-monitor-alert-summary {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 0.0625rem solid var(--glass-border);
+    border-radius: 0.75rem;
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+  }
+
+  .wf-monitor-alert-count {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--color-text);
+  }
+
+  .wf-monitor-alert-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 0.0625rem solid var(--glass-border);
+    border-radius: 0.5rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .wf-monitor-alert-item.info {
+    border-left: 0.25rem solid var(--color-info);
+  }
+
+  .wf-monitor-alert-item.warning {
+    border-left: 0.25rem solid var(--color-warning);
+  }
+
+  .wf-monitor-alert-item.error {
+    border-left: 0.25rem solid var(--color-error);
+  }
+
+  .wf-monitor-alert-content {
+    flex: 1;
+  }
+
+  .wf-monitor-alert-title {
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+  }
+
+  .wf-monitor-alert-description {
+    font-size: var(--text-xs);
+    color: var(--color-muted);
+    line-height: 1.4;
+  }
+
+  /* Settings */
+  .wf-monitor-setting-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .wf-monitor-setting-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 0.0625rem solid var(--glass-border);
+    border-radius: 0.5rem;
+    font-size: var(--text-sm);
+    color: var(--color-text);
+  }
+
+  .wf-monitor-toggle {
+    width: 2.5rem;
+    height: 1.25rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.625rem;
+    position: relative;
+    cursor: pointer;
+    transition: all var(--transition-base) ease;
+  }
+
+  .wf-monitor-toggle::after {
+    content: '';
+    position: absolute;
+    top: 0.125rem;
+    left: 0.125rem;
+    width: 1rem;
+    height: 1rem;
+    background: var(--color-muted);
+    border-radius: 50%;
+    transition: all var(--transition-base) ease;
+  }
+
+  .wf-monitor-toggle.active {
+    background: var(--color-primary);
+  }
+
+  .wf-monitor-toggle.active::after {
+    left: 1.25rem;
+    background: white;
+  }
+
+  /* Zone-based theming support */
+  [data-zone="monitor"] {
+    /* Theme overrides will be injected here */
+  }
+
+  /* Custom Animations */
+  @keyframes wf-progress-shimmer {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .wf-monitor {
+      position: fixed;
+      top: var(--topbar-height);
+      bottom: var(--bottombar-height);
+      right: 0;
+      z-index: var(--z-overlay);
+      transform: translateX(100%);
+      transition: transform var(--transition-base) ease;
+    }
+
+    .wf-monitor.open {
+      transform: translateX(0);
+    }
+  }
+
+  /* Scrollbar Styling */
+  .wf-monitor-content-area::-webkit-scrollbar {
+    width: 0.25rem;
+  }
+
+  .wf-monitor-content-area::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .wf-monitor-content-area::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 0.125rem;
+  }
+
+  .wf-monitor-content-area::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}

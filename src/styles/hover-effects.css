@@ -1,0 +1,476 @@
+/* WIRED|FRONT Hover Effects System */
+
+/* Base Hover Transitions */
+.wf-hover-base {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.wf-hover-smooth {
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.wf-hover-bounce {
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wf-hover-elastic {
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Scale Effects */
+.wf-hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.wf-hover-scale-sm:hover {
+  transform: scale(1.02);
+}
+
+.wf-hover-scale-lg:hover {
+  transform: scale(1.1);
+}
+
+.wf-hover-scale-down:hover {
+  transform: scale(0.95);
+}
+
+/* Lift Effects */
+.wf-hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.wf-hover-lift-sm:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.wf-hover-lift-lg:hover {
+  transform: translateY(-8px);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Tilt Effects */
+.wf-hover-tilt:hover {
+  transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
+}
+
+.wf-hover-tilt-left:hover {
+  transform: perspective(1000px) rotateY(-5deg);
+}
+
+.wf-hover-tilt-right:hover {
+  transform: perspective(1000px) rotateY(5deg);
+}
+
+.wf-hover-tilt-up:hover {
+  transform: perspective(1000px) rotateX(-5deg);
+}
+
+.wf-hover-tilt-down:hover {
+  transform: perspective(1000px) rotateX(5deg);
+}
+
+/* Glow Effects */
+.wf-hover-glow:hover {
+  box-shadow: 
+    0 0 20px rgba(94, 234, 212, 0.4),
+    0 0 40px rgba(94, 234, 212, 0.2),
+    0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.wf-hover-glow-purple:hover {
+  box-shadow: 
+    0 0 20px rgba(108, 38, 222, 0.4),
+    0 0 40px rgba(108, 38, 222, 0.2),
+    0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.wf-hover-glow-pink:hover {
+  box-shadow: 
+    0 0 20px rgba(250, 20, 116, 0.4),
+    0 0 40px rgba(250, 20, 116, 0.2),
+    0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.wf-hover-glow-multi:hover {
+  box-shadow: 
+    0 0 20px rgba(108, 38, 222, 0.3),
+    0 0 40px rgba(250, 20, 116, 0.2),
+    0 0 60px rgba(121, 3, 171, 0.1),
+    0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Border Effects */
+.wf-hover-border {
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.wf-hover-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg,
+    rgba(108, 38, 222, 0.5),
+    rgba(250, 20, 116, 0.5),
+    rgba(121, 3, 171, 0.5)
+  );
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.wf-hover-border:hover::before {
+  opacity: 1;
+}
+
+.wf-hover-border::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-bg);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+/* Gradient Border Animation */
+.wf-hover-gradient-border {
+  position: relative;
+  background: linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+              linear-gradient(45deg, transparent, transparent) border-box;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.wf-hover-gradient-border:hover {
+  background: linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+              linear-gradient(45deg, 
+                rgba(108, 38, 222, 0.8),
+                rgba(250, 20, 116, 0.8),
+                rgba(121, 3, 171, 0.8)
+              ) border-box;
+}
+
+/* Slide Effects */
+.wf-hover-slide-left:hover {
+  transform: translateX(-4px);
+}
+
+.wf-hover-slide-right:hover {
+  transform: translateX(4px);
+}
+
+.wf-hover-slide-up:hover {
+  transform: translateY(-4px);
+}
+
+.wf-hover-slide-down:hover {
+  transform: translateY(4px);
+}
+
+/* Rotate Effects */
+.wf-hover-rotate:hover {
+  transform: rotate(5deg);
+}
+
+.wf-hover-rotate-ccw:hover {
+  transform: rotate(-5deg);
+}
+
+.wf-hover-rotate-180:hover {
+  transform: rotate(180deg);
+}
+
+/* Skew Effects */
+.wf-hover-skew:hover {
+  transform: skew(2deg, 2deg);
+}
+
+.wf-hover-skew-x:hover {
+  transform: skewX(5deg);
+}
+
+.wf-hover-skew-y:hover {
+  transform: skewY(2deg);
+}
+
+/* Background Effects */
+.wf-hover-bg-shift {
+  background: linear-gradient(135deg,
+    rgba(17, 19, 24, 0.8),
+    rgba(17, 19, 24, 0.8)
+  );
+  transition: background 0.3s ease;
+}
+
+.wf-hover-bg-shift:hover {
+  background: linear-gradient(135deg,
+    rgba(108, 38, 222, 0.1),
+    rgba(250, 20, 116, 0.1)
+  );
+}
+
+.wf-hover-bg-gradient {
+  background: var(--color-surface);
+  transition: background 0.3s ease;
+}
+
+.wf-hover-bg-gradient:hover {
+  background: linear-gradient(135deg,
+    rgba(108, 38, 222, 0.2),
+    rgba(250, 20, 116, 0.2)
+  );
+}
+
+/* Text Effects */
+.wf-hover-text-glow:hover {
+  text-shadow: 
+    0 0 10px rgba(94, 234, 212, 0.5),
+    0 0 20px rgba(94, 234, 212, 0.3),
+    0 0 30px rgba(94, 234, 212, 0.1);
+}
+
+.wf-hover-text-gradient {
+  background: linear-gradient(135deg, var(--color-text), var(--color-text));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: background 0.3s ease;
+}
+
+.wf-hover-text-gradient:hover {
+  background: linear-gradient(135deg,
+    rgba(108, 38, 222, 1),
+    rgba(250, 20, 116, 1)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Complex Hover Effects */
+.wf-hover-complex {
+  position: relative;
+  overflow: hidden;
+}
+
+.wf-hover-complex::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle,
+    rgba(108, 38, 222, 0.2) 0%,
+    rgba(250, 20, 116, 0.1) 50%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.6s ease;
+  z-index: -1;
+}
+
+.wf-hover-complex:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.wf-hover-complex:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(250, 20, 116, 0.3);
+}
+
+/* Magnetic Effect */
+.wf-hover-magnetic {
+  transition: transform 0.2s ease;
+}
+
+.wf-hover-magnetic:hover {
+  transform: translate(var(--mouse-x, 0), var(--mouse-y, 0)) scale(1.05);
+}
+
+/* Ripple Effect */
+.wf-hover-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.wf-hover-ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.wf-hover-ripple:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Morphing Effects */
+.wf-hover-morph {
+  border-radius: 1rem;
+  transition: border-radius 0.3s ease, transform 0.3s ease;
+}
+
+.wf-hover-morph:hover {
+  border-radius: 2rem;
+  transform: scale(1.02);
+}
+
+.wf-hover-morph-blob {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  transition: border-radius 0.5s ease, transform 0.3s ease;
+}
+
+.wf-hover-morph-blob:hover {
+  border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  transform: scale(1.05);
+}
+
+/* Particle Effects */
+.wf-hover-particles {
+  position: relative;
+}
+
+.wf-hover-particles::before,
+.wf-hover-particles::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(94, 234, 212, 0.6);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.wf-hover-particles::before {
+  top: 20%;
+  left: 20%;
+}
+
+.wf-hover-particles::after {
+  bottom: 20%;
+  right: 20%;
+}
+
+.wf-hover-particles:hover::before {
+  opacity: 1;
+  transform: translate(-10px, -10px) scale(1.5);
+}
+
+.wf-hover-particles:hover::after {
+  opacity: 1;
+  transform: translate(10px, 10px) scale(1.5);
+}
+
+/* Neon Effects */
+.wf-hover-neon {
+  border: 2px solid rgba(94, 234, 212, 0.3);
+  box-shadow: 
+    inset 0 0 10px rgba(94, 234, 212, 0.1),
+    0 0 10px rgba(94, 234, 212, 0.1);
+  transition: all 0.3s ease;
+}
+
+.wf-hover-neon:hover {
+  border-color: rgba(94, 234, 212, 0.8);
+  box-shadow: 
+    inset 0 0 20px rgba(94, 234, 212, 0.2),
+    0 0 20px rgba(94, 234, 212, 0.4),
+    0 0 40px rgba(94, 234, 212, 0.2);
+}
+
+/* Holographic Effect */
+.wf-hover-holographic {
+  background: linear-gradient(45deg,
+    rgba(108, 38, 222, 0.1),
+    rgba(250, 20, 116, 0.1),
+    rgba(121, 3, 171, 0.1),
+    rgba(191, 74, 6, 0.1)
+  );
+  background-size: 400% 400%;
+  transition: all 0.3s ease;
+}
+
+.wf-hover-holographic:hover {
+  background-position: 100% 100%;
+  transform: scale(1.02);
+  box-shadow: 
+    0 0 30px rgba(108, 38, 222, 0.3),
+    0 0 60px rgba(250, 20, 116, 0.2);
+}
+
+/* Performance Optimizations */
+.wf-hover-gpu {
+  transform: translateZ(0);
+  will-change: transform, box-shadow, background;
+  backface-visibility: hidden;
+}
+
+/* Hover State Combinations */
+.wf-hover-combo-1:hover {
+  transform: translateY(-4px) scale(1.02) rotate(1deg);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(250, 20, 116, 0.3);
+}
+
+.wf-hover-combo-2:hover {
+  transform: perspective(1000px) rotateX(5deg) translateY(-2px);
+  box-shadow: 
+    0 16px 48px rgba(0, 0, 0, 0.6),
+    0 0 24px rgba(108, 38, 222, 0.4);
+}
+
+.wf-hover-combo-3:hover {
+  transform: scale(1.05) skew(1deg, 1deg);
+  background: linear-gradient(135deg,
+    rgba(108, 38, 222, 0.2),
+    rgba(250, 20, 116, 0.2)
+  );
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 16px rgba(121, 3, 171, 0.3);
+}
+
+/* Accessibility Considerations */
+@media (prefers-reduced-motion: reduce) {
+  .wf-hover-base,
+  .wf-hover-smooth,
+  .wf-hover-bounce,
+  .wf-hover-elastic {
+    transition-duration: 0.1s;
+  }
+  
+  .wf-hover-complex::before,
+  .wf-hover-ripple::after {
+    transition-duration: 0.1s;
+  }
+}
+
+/* Focus States for Accessibility */
+.wf-hover-focus:focus-visible {
+  outline: 2px solid rgba(94, 234, 212, 0.8);
+  outline-offset: 2px;
+}

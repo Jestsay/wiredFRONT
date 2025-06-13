@@ -1,0 +1,420 @@
+/* WIRED|FRONT Slime/Liquid Effects */
+
+/* Slime Base Effects */
+.wf-slime-base {
+  position: relative;
+  overflow: hidden;
+}
+
+.wf-slime-base::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg,
+    rgba(108, 38, 222, 0.3),
+    rgba(250, 20, 116, 0.3),
+    rgba(121, 3, 171, 0.3),
+    rgba(191, 74, 6, 0.3)
+  );
+  background-size: 400% 400%;
+  border-radius: inherit;
+  filter: blur(8px);
+  animation: wf-slime-flow 8s ease-in-out infinite;
+  z-index: -1;
+}
+
+.wf-slime-base::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-bg);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+/* Slime Flow Animation */
+@keyframes wf-slime-flow {
+  0%, 100% { 
+    background-position: 0% 50%; 
+    filter: blur(8px) hue-rotate(0deg);
+  }
+  25% { 
+    background-position: 100% 50%; 
+    filter: blur(12px) hue-rotate(90deg);
+  }
+  50% { 
+    background-position: 100% 100%; 
+    filter: blur(6px) hue-rotate(180deg);
+  }
+  75% { 
+    background-position: 0% 100%; 
+    filter: blur(10px) hue-rotate(270deg);
+  }
+}
+
+/* Slime Drip Effect */
+.wf-slime-drip {
+  position: relative;
+  overflow: visible;
+}
+
+.wf-slime-drip::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, 
+    rgba(108, 38, 222, 0.6),
+    rgba(250, 20, 116, 0.6)
+  );
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: wf-slime-drip-animation 3s ease-in-out infinite;
+}
+
+@keyframes wf-slime-drip-animation {
+  0%, 100% { 
+    transform: translateX(-50%) translateY(0) scale(1); 
+    opacity: 0.8; 
+  }
+  50% { 
+    transform: translateX(-50%) translateY(10px) scale(1.2); 
+    opacity: 1; 
+  }
+}
+
+/* Slime Bubble Effect */
+.wf-slime-bubble {
+  position: relative;
+}
+
+.wf-slime-bubble::before,
+.wf-slime-bubble::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(94, 234, 212, 0.3) 0%,
+    rgba(168, 139, 250, 0.2) 50%,
+    transparent 70%
+  );
+  animation: wf-slime-bubble-float 6s ease-in-out infinite;
+}
+
+.wf-slime-bubble::before {
+  width: 30px;
+  height: 30px;
+  top: 10%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.wf-slime-bubble::after {
+  width: 20px;
+  height: 20px;
+  top: 60%;
+  right: 15%;
+  animation-delay: 2s;
+}
+
+@keyframes wf-slime-bubble-float {
+  0%, 100% { 
+    transform: translateY(0) scale(1); 
+    opacity: 0.6; 
+  }
+  25% { 
+    transform: translateY(-20px) scale(1.1); 
+    opacity: 0.8; 
+  }
+  50% { 
+    transform: translateY(-10px) scale(0.9); 
+    opacity: 1; 
+  }
+  75% { 
+    transform: translateY(-30px) scale(1.05); 
+    opacity: 0.7; 
+  }
+}
+
+/* Slime Stretch Effect */
+.wf-slime-stretch {
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wf-slime-stretch:hover {
+  transform: scaleX(1.1) scaleY(0.9);
+  border-radius: 2rem 2rem 1rem 1rem;
+}
+
+.wf-slime-stretch:active {
+  transform: scaleX(0.95) scaleY(1.1);
+  border-radius: 1rem 1rem 2rem 2rem;
+}
+
+/* Slime Morphing Container */
+.wf-slime-morph {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  background: linear-gradient(45deg,
+    rgba(108, 38, 222, 0.2),
+    rgba(250, 20, 116, 0.2),
+    rgba(121, 3, 171, 0.2)
+  );
+  animation: wf-slime-morph-shape 12s ease-in-out infinite;
+}
+
+@keyframes wf-slime-morph-shape {
+  0%, 100% { 
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; 
+    background-position: 0% 50%;
+  }
+  25% { 
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; 
+    background-position: 100% 50%;
+  }
+  50% { 
+    border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; 
+    background-position: 100% 100%;
+  }
+  75% { 
+    border-radius: 60% 40% 60% 40% / 70% 30% 50% 60%; 
+    background-position: 0% 100%;
+  }
+}
+
+/* Slime Trail Effect */
+.wf-slime-trail {
+  position: relative;
+}
+
+.wf-slime-trail::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(108, 38, 222, 0.3),
+    rgba(250, 20, 116, 0.3),
+    transparent
+  );
+  background-size: 200% 100%;
+  border-radius: inherit;
+  animation: wf-slime-trail-move 2s ease-in-out infinite;
+  opacity: 0;
+}
+
+.wf-slime-trail:hover::before {
+  opacity: 1;
+}
+
+@keyframes wf-slime-trail-move {
+  0% { 
+    background-position: -200% 0; 
+    transform: scaleX(0.8);
+  }
+  50% { 
+    background-position: 0% 0; 
+    transform: scaleX(1);
+  }
+  100% { 
+    background-position: 200% 0; 
+    transform: scaleX(0.8);
+  }
+}
+
+/* Slime Gooey Button Effect */
+.wf-slime-button {
+  position: relative;
+  background: linear-gradient(135deg,
+    rgba(108, 38, 222, 0.8),
+    rgba(250, 20, 116, 0.8)
+  );
+  border-radius: 2rem;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  overflow: hidden;
+}
+
+.wf-slime-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.6s ease;
+}
+
+.wf-slime-button:hover {
+  transform: scale(1.05);
+  border-radius: 1.5rem;
+}
+
+.wf-slime-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.wf-slime-button:active {
+  transform: scale(0.95);
+  border-radius: 2.5rem;
+}
+
+/* Slime Loading Effect */
+.wf-slime-loading {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(45deg,
+    rgba(108, 38, 222, 0.6),
+    rgba(250, 20, 116, 0.6)
+  );
+  animation: wf-slime-loading-bounce 1.5s ease-in-out infinite;
+}
+
+.wf-slime-loading::before,
+.wf-slime-loading::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: inherit;
+  animation: wf-slime-loading-bounce 1.5s ease-in-out infinite;
+}
+
+.wf-slime-loading::before {
+  left: -80px;
+  animation-delay: -0.32s;
+}
+
+.wf-slime-loading::after {
+  left: 80px;
+  animation-delay: 0.32s;
+}
+
+@keyframes wf-slime-loading-bounce {
+  0%, 80%, 100% { 
+    transform: scale(0.8); 
+    opacity: 0.5; 
+  }
+  40% { 
+    transform: scale(1.2); 
+    opacity: 1; 
+  }
+}
+
+/* Slime Text Effect */
+.wf-slime-text {
+  background: linear-gradient(45deg,
+    #6c26de,
+    #fa1474,
+    #7903ab,
+    #bf4a06
+  );
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: wf-slime-text-flow 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(108, 38, 222, 0.3));
+}
+
+@keyframes wf-slime-text-flow {
+  0%, 100% { 
+    background-position: 0% 50%; 
+    filter: drop-shadow(0 0 10px rgba(108, 38, 222, 0.3));
+  }
+  25% { 
+    background-position: 100% 50%; 
+    filter: drop-shadow(0 0 15px rgba(250, 20, 116, 0.4));
+  }
+  50% { 
+    background-position: 100% 100%; 
+    filter: drop-shadow(0 0 20px rgba(121, 3, 171, 0.5));
+  }
+  75% { 
+    background-position: 0% 100%; 
+    filter: drop-shadow(0 0 15px rgba(191, 74, 6, 0.4));
+  }
+}
+
+/* Slime Card Effect */
+.wf-slime-card {
+  position: relative;
+  background: rgba(17, 19, 24, 0.8);
+  backdrop-filter: blur(16px);
+  border: 2px solid transparent;
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+
+.wf-slime-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg,
+    rgba(108, 38, 222, 0.5),
+    rgba(250, 20, 116, 0.5),
+    rgba(121, 3, 171, 0.5),
+    rgba(191, 74, 6, 0.5)
+  );
+  background-size: 400% 400%;
+  border-radius: inherit;
+  animation: wf-slime-card-border 8s ease-in-out infinite;
+  z-index: -1;
+}
+
+.wf-slime-card::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: var(--color-bg);
+  border-radius: calc(1.5rem - 2px);
+  z-index: -1;
+}
+
+@keyframes wf-slime-card-border {
+  0%, 100% { 
+    background-position: 0% 50%; 
+    opacity: 0.6; 
+  }
+  25% { 
+    background-position: 100% 50%; 
+    opacity: 0.8; 
+  }
+  50% { 
+    background-position: 100% 100%; 
+    opacity: 1; 
+  }
+  75% { 
+    background-position: 0% 100%; 
+    opacity: 0.8; 
+  }
+}
+
+/* Slime Hover States */
+.wf-slime-hover:hover {
+  animation: wf-slime-morph-shape 2s ease-in-out;
+}
+
+.wf-slime-hover-stretch:hover {
+  animation: wf-slime-stretch-bounce 0.6s ease-in-out;
+}
+
+@keyframes wf-slime-stretch-bounce {
+  0% { transform: scale(1); }
+  50% { transform: scaleX(1.1) scaleY(0.9); }
+  100% { transform: scale(1); }
+}
+
+/* Performance Optimizations for Slime Effects */
+.wf-slime-optimized {
+  transform: translateZ(0);
+  will-change: transform, border-radius, background-position;
+  backface-visibility: hidden;
+}

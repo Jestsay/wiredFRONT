@@ -1,0 +1,209 @@
+WiredFront App Documentation – FINAL MERGED ENTERPRISE DESIGN
+🎯 App Vision & Core Problem
+Tagline:
+Build Your App. Master Your Code.
+Secondary:
+Building the Future Interface, Today.
+
+Problem:
+High failure rate for “vibecoders” due to lack of boundaries, theming, modularity, discipline.
+
+Solution:
+WiredFront turns vibecoders into production engineers through strict onboarding, real modular boundaries, context-aware AI, plug-n-play admin and themes, advanced RBAC, logging, and orchestrator—all with public-private boundary separation.
+
+🏗️ Directory Structure (Explicit, Merged)
+bash
+Copy
+/wiredfront-app/
+├── index.html                        # ✅ Public landing (HTML, 1 CTA to /web)
+├── package.json                      # ✅ NPM dependencies
+├── tailwind.config.ts                # ✅ Tailwind w/ CSS variables
+├── tsconfig.json                     # ✅ TypeScript config
+├── vite.config.ts                    # ✅ Vite w/ path aliases
+├── .env                              # ✅ Environment variables
+│
+├── /src/                             # ✅ Main source directory
+│   ├── main.tsx                      # ✅ SPA React entry (only at /web or sub-boundary)
+│   │
+│   ├── /web/                         # ✅ User app boundary (dashboard, onboarding, projects, gallery, docs, training, pages, layouts)
+│   ├── /admin/                       # ✅ Admin UI (RBAC, users, audit logs, theme editor, feature flags, metrics, logs)
+│   ├── /auth/                        # ✅ Auth (providers, guards, context, session flows)
+│   ├── /chat/                        # ✅ Chat system (modes, plugin registry, session, bridges, admin chat plugins)
+│   ├── /rbac/                        # ✅ Role-based access (roles, perms, guards, admin role UI, RLS policy)
+│   ├── /logger/                      # ✅ Logging (realtime feeds, audit logs, session logs, integrations, alerting)
+│   ├── /theme/                       # ✅ Theme engine (tokens, theme provider, admin visual builder, zone configs, manifests, version, rollback)
+│   ├── /orchestrator/                # ✅ AI Orchestration (prompt routing, session state, backend orchestration)
+│   ├── /docs/                        # ✅ Internal/auto-generated documentation, planning, user guides
+│   ├── /api/                         # ✅ API integrations (Supabase, GraphQL, 3rd party APIs)
+│   ├── /scripts/                     # ✅ Utility scripts (migrations, bootstrap, build, etc)
+│   ├── /shared/                      # ✅ Types, Zustand stores, utils, constants, global hooks
+│
+├── /supabase/                        # ✅ DB, migrations, RLS, audit triggers, SQL
+│   └── /migrations/                  # ✅ Database migrations
+│       ├── 20250611181444_black_wind.sql
+│       ├── 20250612000525_jade_wood.sql
+│       ├── 20250612000740_emerald_silence.sql
+│       ├── 20250612024105_old_plain.sql
+│       ├── 20250612153700_silent_paper.sql
+│       └── 20250612223508_proud_night.sql
+🏠 Public-to-App Flow
+User hits / → Sees index.html (static, public, theme-styled landing)
+
+Landing page = only a CTA:
+
+[Login/Get Started] —> routes to /web
+
+/web mounts full SPA:
+
+All React, app logic, auth, RBAC, theming, logging, orchestrator, docs, admin, chat
+
+No app code, auth, or state is available until user crosses boundary into /web (locked, modular, auditable)
+
+🎨 CSS Grid & Theme Tokens
+css
+Copy
+.wf-layout {
+  display: grid;
+  grid-template-areas: 
+    "topbar topbar topbar"
+    "sidebar main monitor"
+    "bottombar bottombar bottombar";
+  grid-template-rows: var(--topbar-height) 1fr var(--bottombar-height);
+  grid-template-columns: var(--sidebar-width) 1fr var(--monitor-width);
+  height: 100vh;
+  width: 100vw;
+}
+/* Area assignment, driven by theme tokens (from /theme) */
+:root {
+  --topbar-height: 4rem;
+  --bottombar-height: 3.5rem;
+  --sidebar-width: 14.4rem;
+  --sidebar-collapsed-width: 4.5rem;
+  --monitor-width: 22rem;
+  --wf-purple: #6c26de;
+  --wf-pink: #fa1474;
+  --color-bg: #0a0b0f;
+  --color-text: #e2e8f0;
+}
+All colors, spacing, effects, glass, shadows, animations = tokens in /theme/tokens/
+
+ThemeProvider injects at runtime; admin ThemeEditor for live updates, per-zone assignments, rollback, and canary rollout
+
+🛡️ Boundaries & Responsibilities
+/web/
+Main user app, dashboards, onboarding, projects, gallery, docs, training
+
+/admin/
+Admin UI (RBAC, user mgmt, logs, theme editor, audit, feature flags, metrics, system settings)
+
+/auth/
+All login/register/session/guards/providers
+
+/chat/
+Chat UI, modes (dev, training, RAG, image, gallery), plugin registry, session, admin plugins
+
+/rbac/
+Roles, permissions, admin UI, project/org scoped, Supabase RLS enforced
+
+/logger/
+Real-time logging feeds, audit logs, error tracking, alerting, admin review/search/export
+
+/theme/
+Modular tokens, manifests, ThemeProvider, ThemeEditor, versioning, rollback, per-zone config ([data-zone="topbar"] etc), admin rollout
+
+/orchestrator/
+AI prompt routing, complex workflow orchestration, backend session state, plugin execution, traceability
+
+/docs/
+Internal/external documentation, planning mode, user guides, API docs
+
+/api/
+Supabase, GraphQL, 3rd party integrations, ONLY API logic (never business logic)
+
+/scripts/
+Utility scripts, database/bootstrap/build, maintenance tools
+
+/shared/
+Types, Zustand global state, constants, hooks, pure utils
+
+🗄️ Database & Security
+Supabase/Postgres as primary DB
+
+All critical tables:
+
+user_profiles, projects, project_collaborators, activities, hurdles, views, likes, notifications, categories, user_roles, audit_logs
+
+RLS enforced on all tables
+
+RBAC:
+
+Core roles: super_admin, admin, developer, subscriber, guest
+
+All role assignments/audits managed by /rbac and enforced in DB and UI
+
+📊 Logging, Metrics, Audit
+All user/admin/system actions logged
+
+Real-time feeds for admin, search/filter/export/replay, session tracing
+
+Logger integrations for error reporting, ops (Sentry, Highlight, custom)
+
+🤖 Orchestrator
+All AI prompt routing, session orchestration, mode/plugin handling
+
+Orchestrator UI for admin review, plugin management, prompt flow tracing
+
+🏁 Flow Summary
+User enters / — sees static landing (index.html)
+
+Clicks CTA — goes to /web (SPA, all auth/app logic boots here)
+
+All boundaries enforced, every feature in strict module
+
+All logging, theming, RBAC, orchestrator, and state managed via proper boundary/module
+
+All admin, chat, auth, theme, and orchestrator logic pluggable and versioned
+
+🗺️ Mermaid Diagram – Final Modular Architecture
+mermaid
+Copy
+flowchart TD
+    Landing[index.html (Public Landing)]
+    WebApp[/web/ (SPA App)]
+    Admin[/admin/]
+    Auth[/auth/]
+    Chat[/chat/]
+    RBAC[/rbac/]
+    Logger[/logger/]
+    Theme[/theme/]
+    Orchestrator[/orchestrator/]
+    Docs[/docs/]
+    Shared[/shared/]
+    API[/api/]
+    Scripts[/scripts/]
+    Supabase[/supabase/ (DB, RLS, Migrations)]
+
+    Landing -- CTA: Login/Get Started --> WebApp
+    WebApp -- AuthProvider --> Auth
+    WebApp -- RBACProvider --> RBAC
+    WebApp -- ThemeProvider --> Theme
+    WebApp -- ChatRegistry --> Chat
+    WebApp -- LoggerHooks --> Logger
+    WebApp -- DocsProvider --> Docs
+    WebApp -- OrchestratorClient --> Orchestrator
+    WebApp -- SharedTypes/Zustand --> Shared
+    WebApp -- API Client --> API
+    Admin -- ThemeEditor --> Theme
+    Admin -- RBAC UI --> RBAC
+    Admin -- LoggerAdmin --> Logger
+    Admin -- OrchestratorAdmin --> Orchestrator
+    Admin -- Shared --> Shared
+    Admin -- API --> API
+    Logger -- Supabase --> Supabase
+    RBAC -- Supabase --> Supabase
+    Theme -- Supabase --> Supabase
+    Orchestrator -- Supabase --> Supabase
+    API -- Supabase --> Supabase
+🔥 This is your merged, real, future-proofed, boundary-driven, enterprise WiredFront design doc.
+No ellipsis. All modules. All flows.
+Ready to copy-paste, share, and scale.

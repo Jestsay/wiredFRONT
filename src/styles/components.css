@@ -1,0 +1,441 @@
+/* WIRED|FRONT Components - Modular CSS Architecture */
+
+/* Import all component modules */
+@import './components/topbar.css';
+@import './components/bottombar.css';
+@import './components/sidebar.css';
+@import './components/monitor.css';
+@import './components/status.css';
+@import './components/avatar.css';
+@import './components/modal.css';
+@import './components/effects.css';
+
+@layer components {
+  /* =====================================================
+     CORE LAYOUT SYSTEM - ENTERPRISE GRID
+     ===================================================== */
+
+  .wf-layout {
+    display: grid;
+    grid-template-areas: 
+      "topbar topbar topbar"
+      "sidebar main monitor"
+      "bottombar bottombar bottombar";
+    grid-template-rows: var(--topbar-height) 1fr var(--bottombar-height);
+    grid-template-columns: var(--sidebar-width) 1fr var(--monitor-width);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--color-bg);
+  }
+
+  /* Layout State Variants */
+  .wf-layout.sidebar-collapsed {
+    grid-template-columns: var(--sidebar-collapsed-width) 1fr var(--monitor-width);
+  }
+
+  .wf-layout.monitor-hidden {
+    grid-template-columns: var(--sidebar-width) 1fr;
+    grid-template-areas: 
+      "topbar topbar"
+      "sidebar main"
+      "bottombar bottombar";
+  }
+
+  .wf-layout.sidebar-collapsed.monitor-hidden {
+    grid-template-columns: var(--sidebar-collapsed-width) 1fr;
+  }
+
+  /* Main Content Area */
+  .wf-main {
+    grid-area: main;
+    position: relative;
+    overflow: auto;
+    background: var(--color-bg);
+    animation: wf-fade-in 0.8s ease-out;
+    height: 100%;
+    min-height: 0;
+  }
+
+  /* =====================================================
+     BUTTON SYSTEM - ENTERPRISE GRADE
+     ===================================================== */
+
+  .wf-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md) var(--space-xl);
+    border-radius: 0.75rem;
+    font-weight: var(--font-medium);
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-base) var(--ease-out);
+    transform: translateZ(0);
+    will-change: transform, box-shadow, background;
+    font-size: var(--text-base);
+  }
+
+  .wf-btn-primary {
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-color);
+    box-shadow: var(--btn-primary-shadow);
+  }
+
+  .wf-btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: var(--btn-primary-hover-shadow);
+  }
+
+  .wf-btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .wf-btn-glass {
+    background: var(--btn-glass-bg);
+    border: var(--btn-glass-border);
+    backdrop-filter: var(--btn-glass-backdrop);
+    color: var(--color-text);
+  }
+
+  .wf-btn-glass:hover {
+    background: var(--btn-glass-hover-bg);
+    transform: translateY(-0.125rem);
+    box-shadow: var(--shadow-raised);
+  }
+
+  .wf-btn-glass:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .wf-btn-icon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: var(--space-sm);
+  }
+
+  /* =====================================================
+     CARD SYSTEM - ENTERPRISE GRADE
+     ===================================================== */
+
+  .wf-card {
+    background: var(--card-bg);
+    border: var(--card-border);
+    backdrop-filter: var(--card-backdrop);
+    box-shadow: var(--card-shadow);
+    border-radius: 1rem;
+    padding: var(--space-xl);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-base) var(--ease-in-out);
+    animation: wf-scale-in 0.5s var(--ease-in-out);
+  }
+
+  .wf-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle,
+      rgba(108, 38, 222, 0.2) 0%,
+      rgba(250, 20, 116, 0.1) 50%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.6s ease;
+    z-index: -1;
+  }
+
+  .wf-card:hover::before {
+    width: 18.75rem;
+    height: 18.75rem;
+  }
+
+  .wf-card:hover {
+    transform: translateY(-0.125rem) scale(1.02);
+    box-shadow: var(--card-hover-shadow);
+  }
+
+  /* =====================================================
+     UTILITY CLASSES
+     ===================================================== */
+
+  .wf-spin {
+    animation: spin 1s linear infinite;
+  }
+
+  .wf-scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .wf-scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* =====================================================
+     RESPONSIVE DESIGN - MOBILE & TABLET
+     ===================================================== */
+
+  /* Tablet Layout (768px - 1024px) */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .wf-layout {
+      grid-template-columns: var(--sidebar-collapsed-width) 1fr var(--monitor-width);
+    }
+  }
+
+  /* Mobile Layout (< 768px) */
+  @media (max-width: 767px) {
+    .wf-layout {
+      grid-template-areas: 
+        "topbar"
+        "main"
+        "bottombar";
+      grid-template-rows: var(--topbar-height) 1fr var(--bottombar-height);
+      grid-template-columns: 1fr;
+    }
+    
+    .wf-sidebar,
+    .wf-monitor {
+      position: fixed;
+      top: var(--topbar-height);
+      bottom: var(--bottombar-height);
+      z-index: var(--z-overlay);
+      transform: translateX(-100%);
+      transition: transform var(--transition-base) ease;
+    }
+    
+    .wf-sidebar {
+      left: 0;
+      width: var(--sidebar-width);
+    }
+    
+    .wf-monitor {
+      right: 0;
+      width: var(--monitor-width);
+      transform: translateX(100%);
+    }
+    
+    .wf-sidebar.open {
+      transform: translateX(0);
+    }
+    
+    .wf-monitor.open {
+      transform: translateX(0);
+    }
+  }
+}
+
+/* Animation Keyframes */
+@keyframes wf-fade-in {
+  0% { 
+    opacity: 0; 
+    transform: translateY(1.25rem); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes wf-scale-in {
+  0% { 
+    transform: scale(0.8) rotate(-5deg); 
+    opacity: 0; 
+  }
+  50% { 
+    transform: scale(1.05) rotate(2deg); 
+    opacity: 0.8; 
+  }
+  100% { 
+    transform: scale(1) rotate(0deg); 
+    opacity: 1; 
+  }
+}
+
+@keyframes wf-slide-in-left {
+  0% { 
+    transform: translateX(-100%) scale(0.8); 
+    opacity: 0; 
+  }
+  100% { 
+    transform: translateX(0) scale(1); 
+    opacity: 1; 
+  }
+}
+
+@keyframes wf-slide-in-right {
+  0% { 
+    transform: translateX(100%) scale(0.8); 
+    opacity: 0; 
+  }
+  100% { 
+    transform: translateX(0) scale(1); 
+    opacity: 1; 
+  }
+}
+
+@keyframes wf-pulse-glow {
+  0%, 100% { 
+    opacity: 1; 
+    box-shadow: 0 0 0.625rem rgba(94, 234, 212, 0.3);
+  }
+  50% { 
+    opacity: 0.8; 
+    box-shadow: 0 0 1.25rem rgba(94, 234, 212, 0.6);
+  }
+}
+
+@keyframes wf-glow-subtle {
+  0%, 100% { 
+    box-shadow: 0 0 0.625rem rgba(94, 234, 212, 0.2); 
+  }
+  50% { 
+    box-shadow: 0 0 1.25rem rgba(94, 234, 212, 0.4); 
+  }
+}
+
+@keyframes wf-shimmer {
+  0% { 
+    background-position: -200% 0; 
+  }
+  100% { 
+    background-position: 200% 0; 
+  }
+}
+
+@keyframes wf-float-gentle {
+  0%, 100% { 
+    transform: translateY(0); 
+  }
+  50% { 
+    transform: translateY(-0.25rem); 
+  }
+}
+
+@keyframes wf-text-reveal {
+  0% { 
+    opacity: 0; 
+    transform: translateY(1em) scale(0.8); 
+    filter: blur(0.25rem); 
+  }
+  50% { 
+    opacity: 0.8; 
+    transform: translateY(0.2em) scale(1.02); 
+    filter: blur(0.0625rem); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+    filter: blur(0); 
+  }
+}
+
+@keyframes wf-slime-text-flow {
+  0%, 100% { 
+    background-position: 0% 50%; 
+    filter: drop-shadow(0 0 0.625rem rgba(108, 38, 222, 0.3));
+  }
+  25% { 
+    background-position: 100% 50%; 
+    filter: drop-shadow(0 0 0.9375rem rgba(250, 20, 116, 0.4));
+  }
+  50% { 
+    background-position: 100% 100%; 
+    filter: drop-shadow(0 0 1.25rem rgba(121, 3, 171, 0.5));
+  }
+  75% { 
+    background-position: 0% 100%; 
+    filter: drop-shadow(0 0 0.9375rem rgba(191, 74, 6, 0.4));
+  }
+}
+
+@keyframes wf-gradient-flow {
+  0%, 100% { 
+    background-position: 0% 50%; 
+    transform: scale(1);
+  }
+  25% { 
+    background-position: 100% 50%; 
+    transform: scale(1.02);
+  }
+  50% { 
+    background-position: 100% 100%; 
+    transform: scale(1);
+  }
+  75% { 
+    background-position: 0% 100%; 
+    transform: scale(0.98);
+  }
+}
+
+@keyframes wf-morphing-blob {
+  0%, 100% { 
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; 
+    transform: rotate(0deg) scale(1); 
+  }
+  25% { 
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; 
+    transform: rotate(90deg) scale(1.1); 
+  }
+  50% { 
+    border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; 
+    transform: rotate(180deg) scale(0.9); 
+  }
+  75% { 
+    border-radius: 60% 40% 60% 40% / 70% 30% 50% 60%; 
+    transform: rotate(270deg) scale(1.05); 
+  }
+}
+
+@keyframes wf-particle-float {
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg); 
+    opacity: 0; 
+  }
+  25% { 
+    transform: translateY(-1.25rem) rotate(90deg); 
+    opacity: 1; 
+  }
+  50% { 
+    transform: translateY(-0.625rem) rotate(180deg); 
+    opacity: 0.8; 
+  }
+  75% { 
+    transform: translateY(-1.875rem) rotate(270deg); 
+    opacity: 0.6; 
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

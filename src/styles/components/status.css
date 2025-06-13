@@ -1,0 +1,256 @@
+/* WIRED|FRONT Status Components - Enterprise CSS Module */
+
+@layer status {
+  /* =====================================================
+     STATUS COMPONENT SYSTEM - ENTERPRISE GRADE
+     ===================================================== */
+
+  /* Base Status Item */
+  .wf-status-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 0.5rem;
+    font-size: var(--text-xs);
+    color: var(--color-muted);
+    background: rgba(255, 255, 255, 0.03);
+    border: 0.0625rem solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(0.5rem);
+    transition: all var(--transition-base) ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .wf-status-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-text);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .wf-status-item svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    flex-shrink: 0;
+  }
+
+  /* Status Dots */
+  .wf-status-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    display: inline-block;
+    animation: wf-pulse-glow 2.5s ease-in-out infinite;
+  }
+
+  .wf-status-dot.online {
+    background: var(--color-success);
+    box-shadow: 0 0 0.5rem rgba(34, 197, 94, 0.5);
+  }
+
+  .wf-status-dot.warning {
+    background: var(--color-warning);
+    box-shadow: 0 0 0.5rem rgba(250, 204, 21, 0.5);
+  }
+
+  .wf-status-dot.error {
+    background: var(--color-error);
+    box-shadow: 0 0 0.5rem rgba(244, 63, 94, 0.5);
+  }
+
+  .wf-status-dot.info {
+    background: var(--color-info);
+    box-shadow: 0 0 0.5rem rgba(56, 189, 248, 0.5);
+  }
+
+  /* Status Pills */
+  .wf-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: 1rem;
+    font-size: var(--text-xs);
+    font-weight: var(--font-medium);
+    letter-spacing: 0.025em;
+    transition: all var(--transition-base) ease;
+    white-space: nowrap;
+  }
+
+  .wf-status-pill.primary {
+    background: var(--color-primary);
+    color: var(--color-bg);
+    box-shadow: 0 0.125rem 0.5rem rgba(94, 234, 212, 0.3);
+  }
+
+  .wf-status-pill.secondary {
+    background: var(--color-secondary);
+    color: var(--color-bg);
+    box-shadow: 0 0.125rem 0.5rem rgba(125, 211, 252, 0.3);
+  }
+
+  .wf-status-pill.success {
+    background: var(--color-success);
+    color: white;
+    box-shadow: 0 0.125rem 0.5rem rgba(34, 197, 94, 0.3);
+  }
+
+  .wf-status-pill.warning {
+    background: var(--color-warning);
+    color: var(--color-bg);
+    box-shadow: 0 0.125rem 0.5rem rgba(250, 204, 21, 0.3);
+  }
+
+  .wf-status-pill.error {
+    background: var(--color-error);
+    color: white;
+    box-shadow: 0 0.125rem 0.5rem rgba(244, 63, 94, 0.3);
+  }
+
+  .wf-status-pill.info {
+    background: var(--color-info);
+    color: white;
+    box-shadow: 0 0.125rem 0.5rem rgba(56, 189, 248, 0.3);
+  }
+
+  .wf-status-pill.glass {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    color: var(--color-text);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .wf-status-pill:hover {
+    transform: translateY(-0.0625rem);
+    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.2);
+  }
+
+  /* Status Badges */
+  .wf-status-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wf-status-badge::after {
+    content: '';
+    position: absolute;
+    top: -0.25rem;
+    right: -0.25rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    border: 0.125rem solid var(--color-bg);
+  }
+
+  .wf-status-badge.online::after {
+    background: var(--color-success);
+    animation: wf-pulse 2s ease-in-out infinite;
+  }
+
+  .wf-status-badge.away::after {
+    background: var(--color-warning);
+  }
+
+  .wf-status-badge.busy::after {
+    background: var(--color-error);
+  }
+
+  .wf-status-badge.offline::after {
+    background: var(--color-muted);
+  }
+
+  /* Status Cards */
+  .wf-status-card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-radius: 0.75rem;
+    padding: var(--space-lg);
+    transition: all var(--transition-base) ease;
+  }
+
+  .wf-status-card:hover {
+    background: var(--glass-hover);
+    transform: translateY(-0.125rem);
+  }
+
+  .wf-status-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+  }
+
+  .wf-status-card-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    color: var(--color-text);
+  }
+
+  .wf-status-card-title svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--color-primary);
+  }
+
+  .wf-status-card-value {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+  }
+
+  .wf-status-card-description {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+
+  /* Status List */
+  .wf-status-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .wf-status-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    transition: all var(--transition-base) ease;
+  }
+
+  .wf-status-list-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .wf-status-list-item-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+
+  .wf-status-list-item-value {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-text);
+  }
+
+  /* Zone-based theming support */
+  [data-zone="status"] {
+    /* Theme overrides will be injected here */
+  }
+}

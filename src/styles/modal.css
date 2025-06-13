@@ -1,0 +1,190 @@
+/* WIRED|FRONT Modal System - Enterprise Grade */
+
+@layer components {
+  /* Modal Overlay */
+  .wf-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--modal-backdrop);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-modal);
+    padding: var(--space-lg);
+    animation: wf-fade-in 0.3s ease-out;
+  }
+
+  /* Modal Container */
+  .wf-modal-container {
+    background: var(--modal-bg);
+    border: var(--modal-border);
+    backdrop-filter: blur(24px);
+    border-radius: 1.5rem;
+    box-shadow: var(--modal-shadow);
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: wf-scale-in 0.4s var(--ease-out);
+    max-width: 90vw;
+  }
+
+  /* Modal Close Button */
+  .wf-modal-close {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    padding: var(--space-sm);
+    color: var(--color-muted);
+    cursor: pointer;
+    transition: all var(--transition-base) ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wf-modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--color-text);
+    transform: scale(1.05);
+  }
+
+  /* Modal Backdrop Click Handler */
+  .wf-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+  }
+
+  /* Modal Content Scrollbar */
+  .wf-modal-container::-webkit-scrollbar {
+    width: 0.375rem;
+  }
+
+  .wf-modal-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0.25rem;
+  }
+
+  .wf-modal-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 0.25rem;
+  }
+
+  .wf-modal-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  /* Modal Animations */
+  @keyframes wf-modal-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes wf-modal-scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.9) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  /* Responsive Modal */
+  @media (max-width: 768px) {
+    .wf-modal-overlay {
+      padding: var(--space-md);
+    }
+
+    .wf-modal-container {
+      max-width: 100%;
+      max-height: 95vh;
+      border-radius: 1rem;
+    }
+  }
+
+  /* Modal Focus Management */
+  .wf-modal-container:focus {
+    outline: none;
+  }
+
+  /* Modal Accessibility */
+  .wf-modal-overlay[aria-hidden="true"] {
+    display: none;
+  }
+
+  /* Modal Loading State */
+  .wf-modal-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-3xl);
+  }
+
+  .wf-modal-loading-spinner {
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-top: 2px solid var(--color-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  /* Modal Error State */
+  .wf-modal-error {
+    padding: var(--space-xl);
+    text-align: center;
+    color: var(--color-error);
+  }
+
+  .wf-modal-error-icon {
+    width: 3rem;
+    height: 3rem;
+    margin: 0 auto var(--space-lg) auto;
+    color: var(--color-error);
+  }
+
+  .wf-modal-error-title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--space-sm);
+  }
+
+  .wf-modal-error-message {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  /* Modal Success State */
+  .wf-modal-success {
+    padding: var(--space-xl);
+    text-align: center;
+    color: var(--color-success);
+  }
+
+  .wf-modal-success-icon {
+    width: 3rem;
+    height: 3rem;
+    margin: 0 auto var(--space-lg) auto;
+    color: var(--color-success);
+  }
+
+  .wf-modal-success-title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--space-sm);
+  }
+
+  .wf-modal-success-message {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    margin-bottom: var(--space-lg);
+  }
+}

@@ -1,0 +1,240 @@
+/* WIRED|FRONT TopBar Component - Enterprise CSS Module */
+
+@layer topbar {
+  /* =====================================================
+     TOPBAR LAYOUT SYSTEM - ENTERPRISE GRADE
+     ===================================================== */
+
+  .wf-topbar {
+    grid-area: topbar;
+    position: relative;
+    z-index: var(--z-nav);
+    backdrop-filter: var(--glass-blur);
+    background: var(--glass-bg);
+    border-bottom: 0.0625rem solid var(--glass-border);
+    box-shadow: var(--shadow-raised);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 100%;
+    height: var(--topbar-height);
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+
+  /* TopBar Content Container */
+  .wf-topbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 var(--space-xl);
+    gap: var(--space-xl);
+    position: relative;
+  }
+
+  /* Brand Section (Left) */
+  .wf-topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    flex-shrink: 0;
+    min-width: 0;
+    position: relative;
+  }
+
+  .wf-topbar-logo {
+    position: relative;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .wf-topbar-brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    min-width: 0;
+  }
+
+  .wf-topbar-brand-title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    background: var(--wf-text-gradient-animated);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    line-height: 1;
+    letter-spacing: 0.025em;
+    white-space: nowrap;
+  }
+
+  .wf-topbar-brand-subtitle {
+    font-size: var(--text-xs);
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    margin: 0;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  /* Navigation Section (Center) */
+  .wf-topbar-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    flex: 1;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .wf-topbar-action {
+    color: var(--color-muted);
+    font-weight: var(--font-medium);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: 0.5rem;
+    transition: all var(--transition-base) ease;
+    position: relative;
+    letter-spacing: 0.025em;
+    white-space: nowrap;
+    border: 0.0625rem solid transparent;
+    flex-shrink: 0;
+  }
+
+  .wf-topbar-action:hover {
+    color: var(--color-text);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .wf-topbar-action.active {
+    color: var(--color-primary);
+    background: rgba(94, 234, 212, 0.1);
+    border-color: rgba(94, 234, 212, 0.3);
+    box-shadow: 0 0 0.75rem rgba(94, 234, 212, 0.2);
+  }
+
+  /* User Section (Right) */
+  .wf-topbar-user {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-shrink: 0;
+    min-width: 0;
+  }
+
+  .wf-topbar-profile {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-radius: 0.75rem;
+    padding: var(--space-sm);
+    transition: all var(--transition-base) ease;
+    min-width: 0;
+  }
+
+  .wf-topbar-profile:hover {
+    background: var(--glass-hover);
+  }
+
+  .wf-topbar-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--wf-gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .wf-topbar-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    min-width: 0;
+  }
+
+  .wf-topbar-user-name {
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-text);
+    line-height: 1;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .wf-topbar-user-role {
+    font-size: var(--text-xs);
+    color: var(--color-muted);
+    line-height: 1;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .wf-topbar-logout {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-radius: 0.5rem;
+    padding: var(--space-sm);
+    color: var(--color-muted);
+    cursor: pointer;
+    transition: all var(--transition-base) ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .wf-topbar-logout:hover {
+    background: var(--glass-hover);
+    color: var(--color-text);
+  }
+
+  /* Zone-based theming support */
+  [data-zone="topbar"] {
+    /* Theme overrides will be injected here */
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .wf-topbar-content {
+      padding: 0 var(--space-md);
+      gap: var(--space-sm);
+    }
+
+    .wf-topbar-brand-title {
+      font-size: var(--text-lg);
+    }
+
+    .wf-topbar-nav {
+      gap: var(--space-sm);
+    }
+
+    .wf-topbar-action {
+      padding: var(--space-xs) var(--space-sm);
+      font-size: var(--text-xs);
+    }
+    
+    .wf-topbar-user-info {
+      display: none;
+    }
+  }
+}
